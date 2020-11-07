@@ -64,21 +64,35 @@ window.addEventListener('DOMContentLoaded', function(){
     const toggleMenu = () => {
         const btnMenu = document.querySelector('.menu'), // кнопка бургер, открывает и закрывает меню
             menu = document.querySelector('menu'), // скрытое, с помощью translate(-100%) меню
+            body = document.querySelector('body'),
             closeBtn = document.querySelector('.close-btn'), // кнопка "крестик" в меню 
             menuItems = menu.querySelectorAll('ul>li>a'), // список ссылок в выпадающем меню
 
-            handlerMenu = () => {
-                menu.classList.toggle('active-menu');
-            };
+        handlerMenu = () => {
+
+            menu.classList.toggle('active-menu');
+        };
 
         // Кнопка-бургер меню, открыть и закрыть
-        btnMenu.addEventListener('click', handlerMenu);
+        // btnMenu.addEventListener('click', handlerMenu);
 
-        // Кнопка "крестик", закрывает меню
-        closeBtn.addEventListener('click', handlerMenu);
-        
-        // Навешать прослушиватель всем элементам выпадающего меню
-        menuItems.forEach((elem) => {elem.addEventListener('click', handlerMenu);});
+        body.addEventListener('click', (event) => {
+
+            //Присваиваем кликнутый элемент target'у
+            let target = event.target;
+            console.log(event.target);
+
+            if (target.closest('.menu')) {
+                handlerMenu();
+                console.log(1);
+            } else if (target.closest('.active-menu')) {
+                handlerMenu();
+                console.log(2);
+            } else if (!target.closest('.active-menu')) {
+                menu.classList.remove('active-menu');
+                console.log(3);
+            }
+        });
     };
 
     toggleMenu();
@@ -135,18 +149,15 @@ window.addEventListener('DOMContentLoaded', function(){
 
     //Табы
     const tabs = () => {
-        // Родитель табов
-        const tabHeader   = document.querySelector('.service-header');
-
-        // Табы
-        const tab = tabHeader.querySelectorAll('.service-header-tab');
-
-        // Содержание таба
-        const tabContent = document.querySelectorAll('.service-tab'); 
+        
+        const tabHeader   = document.querySelector('.service-header'), //Родитель табов
+            tab = tabHeader.querySelectorAll('.service-header-tab'), //Табы
+            tabContent = document.querySelectorAll('.service-tab'); //Содержание таба
         
         //Перебирает табы и показывает его, остальные скрывает
         const toggleTabContent = (index) => {
             for(let i = 0; i < tabContent.length; i++){
+
                 if(index === i) {
                     tabContent[i].classList.remove('d-none');
                     tab[i].classList.add('active');
