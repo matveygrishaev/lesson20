@@ -67,28 +67,25 @@ window.addEventListener('DOMContentLoaded', function(){
             body = document.querySelector('body'),
             closeBtn = document.querySelector('.close-btn'), // кнопка "крестик" в меню 
             menuItems = menu.querySelectorAll('ul>li>a'), // список ссылок в выпадающем меню
+
         // Кнопка-бургер меню, открыть и закрыть
         handlerMenu = () => {
             menu.classList.toggle('active-menu');
         };
         
         // btnMenu.addEventListener('click', handlerMenu);
-        
+
         body.addEventListener('click', (event) => {
 
             //Присваиваем кликнутый элемент target'у
             let target = event.target;
-            console.log(event.target);
 
             if (target.closest('.menu')) {
                 handlerMenu();
-                console.log(1);
-            } else if (target.closest('.active-menu')) {
+            } else if (target.classList.contains('close-btn')) {
                 handlerMenu();
-                console.log(2);
-            } else if (!target.closest('.active-menu')) {
+            } else if (!target.matches('.active-menu') && !target.matches('li')) {
                 menu.classList.remove('active-menu');
-                console.log(3);
             }
         });
     };
