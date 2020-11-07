@@ -67,15 +67,13 @@ window.addEventListener('DOMContentLoaded', function(){
             body = document.querySelector('body'),
             closeBtn = document.querySelector('.close-btn'), // кнопка "крестик" в меню 
             menuItems = menu.querySelectorAll('ul>li>a'), // список ссылок в выпадающем меню
-
+        // Кнопка-бургер меню, открыть и закрыть
         handlerMenu = () => {
-
             menu.classList.toggle('active-menu');
         };
-
-        // Кнопка-бургер меню, открыть и закрыть
+        
         // btnMenu.addEventListener('click', handlerMenu);
-
+        
         body.addEventListener('click', (event) => {
 
             //Присваиваем кликнутый элемент target'у
